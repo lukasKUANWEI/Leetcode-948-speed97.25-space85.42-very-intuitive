@@ -1,0 +1,27 @@
+class Solution(object):
+    def bagOfTokensScore(self, tokens, P):
+        """
+        :type tokens: List[int]
+        :type P: int
+        :rtype: int
+        """
+        tokens.sort()
+        res=set()
+        res.add(0)
+        score=0
+        
+        while tokens:
+            if P>=tokens[0]:
+                P-=tokens.pop(0)
+                score+=1
+                res.add(score)
+            elif P<tokens[0] and score>0:
+                score-=1
+                P+=tokens.pop(-1)
+            
+            else:
+                break
+        
+        #print(res)
+        
+        return max(res)
